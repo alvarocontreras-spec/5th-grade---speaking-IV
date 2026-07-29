@@ -10,11 +10,11 @@ document.addEventListener('DOMContentLoaded', () => {
     const adjectivesList = ['exciting', 'healthy', 'fast', 'fun', 'popular', 'interesting'];
     const connectorsList = ['and', 'also', 'in addition', 'moreover'];
 
-    // Referencias del DOM
+    // Referencias DOM
     const courseSelect = document.getElementById('course');
     const studentSelect = document.getElementById('student');
     const sportCards = document.querySelectorAll('.sport-card');
-    const wordButtons = document.querySelectorAll('.category .word');
+    const wordButtons = document.querySelectorAll('.word');
     const wordBankContainer = document.getElementById('wordBank');
     const textarea = document.getElementById('writing');
     const preview = document.getElementById('preview');
@@ -26,17 +26,15 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Botones
     const reviewButton = document.getElementById('reviewButton');
-    // Mantenemos la referencia del botón (puedes mantener id="sendButton" o cambiarlo a "downloadButton" en tu HTML)
-    const downloadButton = document.getElementById('downloadButton') || document.getElementById('sendButton');
+    const downloadButton = document.getElementById('downloadButton');
 
     let selectedSport = '';
 
-    // Sanitización HTML para vista previa
     const escapeHTML = (str) => str.replace(/[&<>'"]/g, tag => ({
         '&': '&amp;', '<': '&lt;', '>': '&gt;', "'": '&#39;', '"': '&quot;'
     }[tag] || tag));
 
-    // Cargar alumnos dinámicamente
+    // Cargar nombres de estudiantes
     courseSelect.addEventListener('change', () => {
         const selectedClass = courseSelect.value;
         studentSelect.innerHTML = '<option value="">Select your name</option>';
@@ -54,7 +52,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     studentSelect.addEventListener('change', updatePreview);
 
-    // Selección de deporte
+    // Selección de Deporte
     sportCards.forEach(card => {
         card.addEventListener('click', () => {
             sportCards.forEach(c => c.classList.remove('selected'));
@@ -64,15 +62,15 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-    // Añadir palabras al Word Bank (como referencia visual)
+    // Agregar palabras al Word Bank visual
     wordButtons.forEach(button => {
         button.addEventListener('click', () => {
             const wordText = button.textContent.trim();
             const existingWords = Array.from(wordBankContainer.children).map(el => el.dataset.word);
 
             if (!existingWords.includes(wordText)) {
-                const newWordBtn = document.createElement('button');
-                newWordBtn.classList.add('word-chip');
+                const newWordBtn = document.createElement('div');
+                newWordBtn.classList.add('bank-word'); // Utiliza la clase de tu CSS
                 newWordBtn.dataset.word = wordText;
                 newWordBtn.textContent = `${wordText} ✕`;
                 newWordBtn.title = "Click to remove";
@@ -86,30 +84,27 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-    // Actualización de contadores
+    // Actualizar contadores
     function updateProgressAndPreview() {
         const text = textarea.value.trim();
         const words = text ? text.split(/\s+/) : [];
         const lowerText = text.toLowerCase();
 
-        // Conteo de palabras
         const totalWords = words.length;
         wordCounter.textContent = `${totalWords} / 40`;
-        wordCounter.style.color = totalWords >= 40 ? '#2e7d32' : '#000';
+        wordCounter.style.color = totalWords >= 40 ? 'var(--success)' : 'var(--text)';
 
-        // Conteo de adjetivos
         const usedAdjectives = adjectivesList.filter(adj =>
             new RegExp(`\\b${adj}\\b`, 'i').test(lowerText)
         );
         adjCounter.textContent = `${usedAdjectives.length} / 2`;
-        adjCounter.style.color = usedAdjectives.length >= 2 ? '#2e7d32' : '#000';
+        adjCounter.style.color = usedAdjectives.length >= 2 ? 'var(--success)' : 'var(--text)';
 
-        // Conteo de conectores
         const usedConnectors = connectorsList.filter(conn =>
             new RegExp(`\\b${conn}\\b`, 'i').test(lowerText)
         );
         connectorCounter.textContent = `${usedConnectors.length} / 2`;
-        connectorCounter.style.color = usedConnectors.length >= 2 ? '#2e7d32' : '#000';
+        connectorCounter.style.color = usedConnectors.length >= 2 ? 'var(--success)' : 'var(--text)';
 
         updatePreview();
     }
@@ -150,7 +145,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     textarea.addEventListener('input', updateProgressAndPreview);
 
-    // Botón de revisión rápida
+    // Botón de revisión
     reviewButton.addEventListener('click', () => {
         const student = studentSelect.value || 'Not selected';
         const course = courseSelect.value || 'Not selected';
@@ -159,26 +154,24 @@ document.addEventListener('DOMContentLoaded', () => {
         alert(`Check details:\n\n• Student: ${student}\n• Class: ${course}\n• Sport: ${selectedSport || 'None'}\n• Word Count: ${wordsCount}/40`);
     });
 
-    // Botón de Descarga TXT para Google Classroom
-    if (downloadButton) {
-        downloadButton.addEventListener('click', () => {
-            const course = courseSelect.value;
-            const student = studentSelect.value;
-            const text = textarea.value.trim();
+    // Botón de descarga para Classroom
+    downloadButton.addEventListener('click', () => {
+        const course = courseSelect.value;
+        const student = studentSelect.value;
+        const text = textarea.value.trim();
 
-            if (!course || !student) {
-                alert('Please select your class and name before downloading.');
-                return;
-            }
-            if (!text) {
-                alert('Please write your paragraph before downloading!');
-                return;
-            }
+        if (!course || !student) {
+            alert('Please select your class and name before downloading.');
+            return;
+        }
+        if (!text) {
+            alert('Please write your paragraph before downloading!');
+            return;
+        }
 
-            const wordsCount = text.split(/\s+/).filter(Boolean).length;
+        const wordsCount = text.split(/\s+/).filter(Boolean).length;
 
-            // Formato ordenado para el archivo .txt
-            const fileContent = `ENGLISH WRITING TASK
+        const fileContent = `ENGLISH WRITING TASK - HARMONIZE 1
 ----------------------------------
 Student: ${student}
 Class: ${course}
@@ -189,23 +182,20 @@ Word Count: ${wordsCount} words
 ${text}
 `;
 
-            // Crear el nombre del archivo estilizado: Homework_5thA_NAME.txt
-            const safeStudentName = student.replace(/[^a-zA-Z0-9]/g, '_');
-            const fileName = `Homework_${course}_${safeStudentName}.txt`;
+        const safeStudentName = student.replace(/[^a-zA-Z0-9]/g, '_');
+        const fileName = `Homework_${course}_${safeStudentName}.txt`;
 
-            // Generar y activar la descarga
-            const blob = new Blob([fileContent], { type: 'text/plain;charset=utf-8' });
-            const link = document.createElement('a');
-            link.href = URL.createObjectURL(blob);
-            link.download = fileName;
-            
-            document.body.appendChild(link);
-            link.click();
-            document.body.removeChild(link);
+        const blob = new Blob([fileContent], { type: 'text/plain;charset=utf-8' });
+        const link = document.createElement('a');
+        link.href = URL.createObjectURL(blob);
+        link.download = fileName;
+        
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
 
-            URL.revokeObjectURL(link.href);
+        URL.revokeObjectURL(link.href);
 
-            alert('Your file has been downloaded! Now you can attach it in Google Classroom.');
-        });
-    }
+        alert('Your file has been downloaded! Now attach it in Google Classroom.');
+    });
 });
