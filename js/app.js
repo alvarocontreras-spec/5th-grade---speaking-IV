@@ -26,11 +26,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Botones
     const reviewButton = document.getElementById('reviewButton');
-    const sendButton = document.getElementById('sendButton');
+    // Mantenemos la referencia del botón (puedes mantener id="sendButton" o cambiarlo a "downloadButton" en tu HTML)
+    const downloadButton = document.getElementById('downloadButton') || document.getElementById('sendButton');
 
     let selectedSport = '';
 
-    // Función auxiliar para sanitizar HTML (Prevención XSS)
+    // Sanitización HTML para vista previa
     const escapeHTML = (str) => str.replace(/[&<>'"]/g, tag => ({
         '&': '&amp;', '<': '&lt;', '>': '&gt;', "'": '&#39;', '"': '&quot;'
     }[tag] || tag));
@@ -63,7 +64,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-    // Añadir palabras al Word Bank (solo como guía visual)
+    // Añadir palabras al Word Bank (como referencia visual)
     wordButtons.forEach(button => {
         button.addEventListener('click', () => {
             const wordText = button.textContent.trim();
@@ -74,9 +75,8 @@ document.addEventListener('DOMContentLoaded', () => {
                 newWordBtn.classList.add('word-chip');
                 newWordBtn.dataset.word = wordText;
                 newWordBtn.textContent = `${wordText} ✕`;
-                newWordBtn.title = "Click to remove from your word bank";
+                newWordBtn.title = "Click to remove";
 
-                // Permitir al estudiante eliminar la palabra del Word Bank si la seleccionó por error
                 newWordBtn.addEventListener('click', () => {
                     newWordBtn.remove();
                 });
@@ -86,7 +86,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-    // Actualización de contadores y revisión de requerimientos
+    // Actualización de contadores
     function updateProgressAndPreview() {
         const text = textarea.value.trim();
         const words = text ? text.split(/\s+/) : [];
@@ -114,7 +114,7 @@ document.addEventListener('DOMContentLoaded', () => {
         updatePreview();
     }
 
-    // Actualizar vista previa de forma segura
+    // Actualizar vista previa
     function updatePreview() {
         const text = textarea.value.trim();
         const studentName = studentSelect.value;
@@ -150,7 +150,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     textarea.addEventListener('input', updateProgressAndPreview);
 
-    // Botones de acción
+    // Botón de revisión rápida
     reviewButton.addEventListener('click', () => {
         const student = studentSelect.value || 'Not selected';
         const course = courseSelect.value || 'Not selected';
@@ -159,15 +159,53 @@ document.addEventListener('DOMContentLoaded', () => {
         alert(`Check details:\n\n• Student: ${student}\n• Class: ${course}\n• Sport: ${selectedSport || 'None'}\n• Word Count: ${wordsCount}/40`);
     });
 
-    sendButton.addEventListener('click', () => {
-        if (!courseSelect.value || !studentSelect.value) {
-            alert('Please select your class and name before sending.');
-            return;
-        }
-        if (!textarea.value.trim()) {
-            alert('Please write your paragraph before sending!');
-            return;
-        }
-        alert(`Thank you, ${studentSelect.value}! Your homework has been sent.`);
-    });
+    // Botón de Descarga TXT para Google Classroom
+    if (downloadButton) {
+        downloadButton.addEventListener('click', () => {
+            const course = courseSelect.value;
+            const student = studentSelect.value;
+            const text = textarea.value.trim();
+
+            if (!course || !student) {
+                alert('Please select your class and name before downloading.');
+                return;
+            }
+            if (!text) {
+                alert('Please write your paragraph before downloading!');
+                return;
+            }
+
+            const wordsCount = text.split(/\s+/).filter(Boolean).length;
+
+            // Formato ordenado para el archivo .txt
+            const fileContent = `ENGLISH WRITING TASK
+----------------------------------
+Student: ${student}
+Class: ${course}
+Sport Chosen: ${selectedSport || 'Not specified'}
+Word Count: ${wordsCount} words
+----------------------------------
+
+${text}
+`;
+
+            // Crear el nombre del archivo estilizado: Homework_5thA_NAME.txt
+            const safeStudentName = student.replace(/[^a-zA-Z0-9]/g, '_');
+            const fileName = `Homework_${course}_${safeStudentName}.txt`;
+
+            // Generar y activar la descarga
+            const blob = new Blob([fileContent], { type: 'text/plain;charset=utf-8' });
+            const link = document.createElement('a');
+            link.href = URL.createObjectURL(blob);
+            link.download = fileName;
+            
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+
+            URL.revokeObjectURL(link.href);
+
+            alert('Your file has been downloaded! Now you can attach it in Google Classroom.');
+        });
+    }
 });
