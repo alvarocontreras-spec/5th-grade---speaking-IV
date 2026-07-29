@@ -18,22 +18,26 @@ document.addEventListener('DOMContentLoaded', () => {
     const wordBankContainer = document.getElementById('wordBank');
     const textarea = document.getElementById('writing');
     const preview = document.getElementById('preview');
-    
+
     // Contadores
     const wordCounter = document.getElementById('wordCounter');
     const adjCounter = document.getElementById('adjCounter');
     const connectorCounter = document.getElementById('connectorCounter');
-    
+
     // Botones
     const reviewButton = document.getElementById('reviewButton');
     const sendButton = document.getElementById('sendButton');
 
     let selectedSport = '';
 
-    // Cargar alumnos dinámicamente según la clase seleccionada
+    // Función auxiliar para sanitizar cadenas de texto
+    const escapeHTML = (str) => str.replace(/[&<>'"]/g, tag => ({
+        '&': '&amp;', '<': '&lt;', '>': '&gt;', "'": '&#39;', '"': '&quot;'
+    }[tag] || tag));
+
+    // Cargar alumnos dinámicamente
     courseSelect.addEventListener('change', () => {
         const selectedClass = courseSelect.value;
-        
         studentSelect.innerHTML = '<option value="">Select your name</option>';
 
         if (selectedClass && students[selectedClass]) {
@@ -64,7 +68,7 @@ document.addEventListener('DOMContentLoaded', () => {
         button.addEventListener('click', () => {
             const wordText = button.textContent.trim();
             const existingWords = Array.from(wordBankContainer.children).map(el => el.textContent.trim());
-            
+
             if (!existingWords.includes(wordText)) {
                 const newWordBtn = document.createElement('button');
                 newWordBtn.classList.add('word-chip');
@@ -84,10 +88,17 @@ document.addEventListener('DOMContentLoaded', () => {
         const start = input.selectionStart;
         const end = input.selectionEnd;
         const currentText = input.value;
-        
-        input.value = currentText.substring(0, start) + ' ' + text + ' ' + currentText.substring(end);
+
+        // Formatear espacios de forma limpia
+        const padBefore = (start > 0 && currentText[start - 1] !== ' ') ? ' ' : '';
+        const padAfter = (end < currentText.length && currentText[end] !== ' ') ? ' ' : '';
+
+        const inserted = padBefore + text + padAfter;
+        input.value = currentText.substring(0, start) + inserted + currentText.substring(end);
         input.focus();
-        input.selectionStart = input.selectionEnd = start + text.length + 2;
+        
+        const newCursorPos = start + inserted.length;
+        input.selectionStart = input.selectionEnd = newCursorPos;
     }
 
     // Actualización de contadores y revisión de requerimientos
@@ -102,14 +113,14 @@ document.addEventListener('DOMContentLoaded', () => {
         wordCounter.style.color = totalWords >= 40 ? '#2e7d32' : '#000';
 
         // Conteo de adjetivos
-        const usedAdjectives = adjectivesList.filter(adj => 
+        const usedAdjectives = adjectivesList.filter(adj =>
             new RegExp(`\\b${adj}\\b`, 'i').test(lowerText)
         );
         adjCounter.textContent = `${usedAdjectives.length} / 2`;
         adjCounter.style.color = usedAdjectives.length >= 2 ? '#2e7d32' : '#000';
 
         // Conteo de conectores
-        const usedConnectors = connectorsList.filter(conn => 
+        const usedConnectors = connectorsList.filter(conn =>
             new RegExp(`\\b${conn}\\b`, 'i').test(lowerText)
         );
         connectorCounter.textContent = `${usedConnectors.length} / 2`;
@@ -118,7 +129,7 @@ document.addEventListener('DOMContentLoaded', () => {
         updatePreview();
     }
 
-    // Actualizar vista previa
+    // Actualizar vista previa de forma segura (Previene XSS)
     function updatePreview() {
         const text = textarea.value.trim();
         const studentName = studentSelect.value;
@@ -129,18 +140,27 @@ document.addEventListener('DOMContentLoaded', () => {
             return;
         }
 
-        let content = '';
+        preview.innerHTML = '';
+
         if (studentName || courseName) {
-            content += `<p><strong>Student:</strong> ${studentName || '___'}<br><strong>Class:</strong> ${courseName || '___'}</p>`;
-        }
-        if (selectedSport) {
-            content += `<p><strong>Sport:</strong> ${selectedSport}</p>`;
-        }
-        if (text) {
-            content += `<hr><p>${text.replace(/\n/g, '<br>')}</p>`;
+            const infoP = document.createElement('p');
+            infoP.innerHTML = `<strong>Student:</strong> ${escapeHTML(studentName || '___')}<br><strong>Class:</strong> ${escapeHTML(courseName || '___')}`;
+            preview.appendChild(infoP);
         }
 
-        preview.innerHTML = content;
+        if (selectedSport) {
+            const sportP = document.createElement('p');
+            sportP.innerHTML = `<strong>Sport:</strong> ${escapeHTML(selectedSport)}`;
+            preview.appendChild(sportP);
+        }
+
+        if (text) {
+            preview.appendChild(document.createElement('hr'));
+            const textP = document.createElement('p');
+            textP.style.whiteSpace = 'pre-wrap';
+            textP.textContent = text; // Asignación segura
+            preview.appendChild(textP);
+        }
     }
 
     textarea.addEventListener('input', updateProgressAndPreview);
