@@ -1,322 +1,374 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>English Writing Task - 5th Grade</title>
+    <style>
+        /* Estilos generales */
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f4f7f6;
+            color: #333;
+            line-height: 1.6;
+            margin: 0;
+            padding: 20px;
+        }
 
-    <title>Unit 3 Homework | Harmonize 1</title>
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: #ffffff;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+        }
 
-    <link rel="stylesheet" href="css/style.css">
+        h1 {
+            text-align: center;
+            color: #2c3e50;
+            margin-bottom: 25px;
+        }
 
+        h2 {
+            color: #34495e;
+            border-bottom: 2px solid #ecf0f1;
+            padding-bottom: 8px;
+            margin-top: 25px;
+        }
+
+        /* Formulario e Info de Alumno */
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        label {
+            display: block;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        select, textarea {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+            font-size: 1rem;
+            box-sizing: border-box;
+        }
+
+        /* Tarjetas de Deporte */
+        .sports-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(110px, 1fr));
+            gap: 12px;
+            margin-top: 15px;
+        }
+
+        .sport-card {
+            background-color: #f8f9fa;
+            border: 2px solid #e9ecef;
+            border-radius: 8px;
+            padding: 15px;
+            text-align: center;
+            cursor: pointer;
+            font-weight: bold;
+            transition: all 0.2s ease;
+        }
+
+        .sport-card:hover {
+            border-color: #4a90e2;
+            background-color: #f0f7ff;
+        }
+
+        .sport-card.selected {
+            border-color: #27ae60;
+            background-color: #e8f8f5;
+            color: #27ae60;
+        }
+
+        /* Word Bank */
+        .category {
+            margin-bottom: 15px;
+        }
+
+        .category h3 {
+            font-size: 0.95rem;
+            margin: 8px 0;
+            color: #555;
+        }
+
+        .word {
+            background-color: #e3f2fd;
+            border: 1px solid #90caf9;
+            color: #1565c0;
+            padding: 6px 12px;
+            border-radius: 20px;
+            cursor: pointer;
+            margin: 3px;
+            font-size: 0.9rem;
+            transition: background 0.2s;
+        }
+
+        .word:hover {
+            background-color: #bbdefb;
+        }
+
+        .word-bank-box {
+            background: #fafafa;
+            border: 1px dashed #bbb;
+            padding: 12px;
+            border-radius: 8px;
+            margin-top: 10px;
+            min-height: 40px;
+        }
+
+        .chips-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+
+        .word-chip {
+            background-color: #2c3e50;
+            color: #fff;
+            border: none;
+            padding: 5px 12px;
+            border-radius: 15px;
+            font-size: 0.85rem;
+            cursor: pointer;
+        }
+
+        .word-chip:hover {
+            background-color: #e74c3c;
+        }
+
+        /* Tarjeta de Ejemplo (A2 Level) */
+        .example-card {
+            background-color: #f8f9fa;
+            border: 2px dashed #4a90e2;
+            border-radius: 10px;
+            padding: 15px 20px;
+            margin: 25px 0;
+        }
+
+        .example-header {
+            font-size: 1.1rem;
+            color: #2c3e50;
+            margin-bottom: 8px;
+        }
+
+        .example-meta {
+            margin: 0 0 10px 0;
+            color: #555;
+            font-size: 0.95rem;
+        }
+
+        .example-text {
+            font-size: 1rem;
+            line-height: 1.6;
+            color: #333;
+            background-color: #ffffff;
+            padding: 12px;
+            border-radius: 6px;
+            border-left: 4px solid #4a90e2;
+        }
+
+        .tag-adj {
+            background-color: #d4edda;
+            color: #155724;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-weight: bold;
+        }
+
+        .tag-conn {
+            background-color: #fff3cd;
+            color: #856404;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-weight: bold;
+        }
+
+        .example-legend {
+            display: flex;
+            gap: 15px;
+            margin-top: 10px;
+            font-size: 0.85rem;
+            color: #666;
+        }
+
+        /* Contadores */
+        .counters {
+            display: flex;
+            justify-content: space-between;
+            background: #f1f3f5;
+            padding: 10px 15px;
+            border-radius: 6px;
+            margin-bottom: 10px;
+            font-weight: bold;
+            font-size: 0.9rem;
+        }
+
+        textarea {
+            height: 120px;
+            resize: vertical;
+        }
+
+        /* Vista Previa */
+        .preview-box {
+            background: #fafafa;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            padding: 15px;
+            min-height: 80px;
+        }
+
+        /* Botones de Acción */
+        .button-group {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .btn {
+            flex: 1;
+            padding: 12px;
+            border: none;
+            border-radius: 6px;
+            font-size: 1rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+
+        .btn-secondary {
+            background-color: #7f8c8d;
+            color: white;
+        }
+
+        .btn-secondary:hover {
+            background-color: #6c757d;
+        }
+
+        .btn-primary {
+            background-color: #27ae60;
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background-color: #219150;
+        }
+    </style>
 </head>
-
 <body>
 
-<header>
+    <div class="container">
+        <h1>English Writing Activity</h1>
 
-    <h1>🏆 Unit 3 Homework</h1>
+        <!-- Identificación del Estudiante -->
+        <section class="section">
+            <div class="form-group">
+                <label for="course">Class:</label>
+                <select id="course">
+                    <option value="">Select your class</option>
+                    <option value="5thA">5th Grade A</option>
+                    <option value="5thB">5th Grade B</option>
+                    <option value="5thC">5th Grade C</option>
+                </select>
+            </div>
 
-    <p>My Favourite Sport</p>
+            <div class="form-group">
+                <label for="student">Student Name:</label>
+                <select id="student">
+                    <option value="">Select your name</option>
+                </select>
+            </div>
+        </section>
 
-</header>
+        <!-- Paso 1: Selección de Deporte -->
+        <section class="section">
+            <h2>① Select a Sport</h2>
+            <div class="sports-grid">
+                <div class="sport-card" data-sport="Football">⚽ Football</div>
+                <div class="sport-card" data-sport="Basketball">🏀 Basketball</div>
+                <div class="sport-card" data-sport="Swimming">🏊 Swimming</div>
+                <div class="sport-card" data-sport="Tennis">🎾 Tennis</div>
+                <div class="sport-card" data-sport="Volleyball">🏐 Volleyball</div>
+                <div class="sport-card" data-sport="Running">🏃 Running</div>
+            </div>
+        </section>
 
+        <!-- Paso 2: Banco de Palabras Helper -->
+        <section class="section">
+            <h2>② Word Bank</h2>
+            <p style="font-size: 0.9rem; color: #666;">Click on words to save them to your helper list:</p>
 
-<main>
+            <div class="category">
+                <h3>Adjectives:</h3>
+                <button class="word">exciting</button>
+                <button class="word">healthy</button>
+                <button class="word">fast</button>
+                <button class="word">fun</button>
+                <button class="word">popular</button>
+                <button class="word">interesting</button>
+            </div>
 
-    
-<!-- ===================================== -->
-<!-- STUDENT INFORMATION -->
-<!-- ===================================== -->
+            <div class="category">
+                <h3>Connectors:</h3>
+                <button class="word">and</button>
+                <button class="word">also</button>
+                <button class="word">in addition</button>
+                <button class="word">moreover</button>
+            </div>
 
-<section class="card">
+            <div class="word-bank-box">
+                <strong style="font-size: 0.85rem; color: #555;">Your Selected Helper Words:</strong>
+                <div id="wordBank" class="chips-container" style="margin-top: 5px;"></div>
+            </div>
+        </section>
 
-    <h2>👤 Student Information</h2>
-
-    <label for="course">Class</label>
-
-    <select id="course">
-
-        <option value="">Select your class</option>
-
-        <option value="5thA">5th A</option>
-
-        <option value="5thB">5th B</option>
-
-        <option value="5thC">5th C</option>
-
-    </select>
-
-    <br><br>
-
-    <label for="student">Student</label>
-
-    <select id="student">
-
-        <option value="">Select your name</option>
-
-    </select>
-
-</section>
-<!-- ===================================== -->
-<!-- STEP 1 -->
-<!-- ===================================== -->
-
-<section class="card">
-
-    <h2>① Choose your favourite sport</h2>
-
-    <div class="sports-grid">
-
-        <div class="sport-card" data-sport="Football">
-            <img src="https://images.unsplash.com/photo-1579952363873-27f3bade9f55?w=400&q=80" alt="Football">
-            <h3>Football</h3>
+        <!-- EJEMPLO (Nivel A2) -->
+        <div class="example-card">
+            <div class="example-header">
+                💡 <strong>Example (A2 Level)</strong>
+            </div>
+            <p class="example-meta"><strong>Sport:</strong> Basketball</p>
+            <p class="example-text">
+                "Basketball is my favorite sport because it is <span class="tag-adj">fun</span> <span class="tag-conn">and</span> <span class="tag-adj">popular</span>. I play with my friends at school every afternoon. <span class="tag-conn">Also</span>, it is very <span class="tag-adj">healthy</span> for my body. <span class="tag-conn">In addition</span>, I like to watch games on TV with my dad."
+            </p>
+            <div class="example-legend">
+                <span><strong class="tag-adj">Green</strong> = Adjectives</span>
+                <span><strong class="tag-conn">Yellow</strong> = Connectors</span>
+            </div>
         </div>
 
-        <div class="sport-card" data-sport="Basketball">
-            <img src="https://images.unsplash.com/photo-1546519638-68e109498ffc?w=400&q=80" alt="Basketball">
-            <h3>Basketball</h3>
-        </div>
+        <!-- Paso 3: Redacción del Párrafo -->
+        <section class="section">
+            <h2>③ Write your paragraph</h2>
 
-        <div class="sport-card" data-sport="Tennis">
-            <img src="https://images.unsplash.com/photo-1622279457486-62dcc4a431d6?w=400&q=80" alt="Tennis">
-            <h3>Tennis</h3>
-        </div>
+            <div class="counters">
+                <div>Words: <span id="wordCounter">0 / 40</span></div>
+                <div>Adjectives: <span id="adjCounter">0 / 2</span></div>
+                <div>Connectors: <span id="connectorCounter">0 / 2</span></div>
+            </div>
 
-        <div class="sport-card" data-sport="Volleyball">
-            <img src="https://images.unsplash.com/photo-1612872087720-bb876e2e67d1?w=400&q=80" alt="Volleyball">
-            <h3>Volleyball</h3>
-        </div>
+            <textarea id="writing" placeholder="Write your paragraph here using your selected words..."></textarea>
+        </section>
 
-        <div class="sport-card" data-sport="Swimming">
-            <img src="https://images.unsplash.com/photo-1530549387789-4c1017266635?w=400&q=80" alt="Swimming">
-            <h3>Swimming</h3>
-        </div>
+        <!-- Paso 4: Vista Previa y Descarga -->
+        <section class="section">
+            <h2>④ Live Preview</h2>
+            <div id="preview" class="preview-box">Your writing will appear here...</div>
 
+            <div class="button-group">
+                <button id="reviewButton" class="btn btn-secondary">Check Requirements</button>
+                <button id="downloadButton" class="btn btn-primary">Download TXT for Classroom</button>
+            </div>
+        </section>
     </div>
 
-</section>
-
-<!-- ===================================== -->
-<!-- STEP 2 -->
-<!-- ===================================== -->
-
-<section class="card">
-
-<h2>② Build your Word Bank</h2>
-
-<div class="categories">
-
-
-<div class="category">
-
-<h3>⭐ Adjectives</h3>
-
-<button class="word">exciting</button>
-
-<button class="word">healthy</button>
-
-<button class="word">fast</button>
-
-<button class="word">fun</button>
-
-<button class="word">popular</button>
-
-<button class="word">interesting</button>
-
-</div>
-
-
-<div class="category">
-
-<h3>🎒 Equipment</h3>
-
-<button class="word">ball</button>
-
-<button class="word">racket</button>
-
-<button class="word">net</button>
-
-<button class="word">trainers</button>
-
-<button class="word">helmet</button>
-
-</div>
-
-
-<div class="category">
-
-<h3>🔗 Connectors</h3>
-
-<button class="word">and</button>
-
-<button class="word">also</button>
-
-<button class="word">in addition</button>
-
-<button class="word">moreover</button>
-
-</div>
-
-</div>
-
-</section>
-
-
-<!-- ===================================== -->
-<!-- WORD BANK -->
-<!-- ===================================== -->
-
-<section class="card">
-
-<h2>📚 My Word Bank</h2>
-
-<p class="instruction">
-
-Click any word to add it to your writing.
-
-</p>
-
-<div id="wordBank">
-
-</div>
-
-</section>
-
-
-
-<!-- ===================================== -->
-<!-- WRITING -->
-<!-- ===================================== -->
-
-<section class="card">
-
-<h2>③ Write your paragraph</h2>
-
-<p>
-
-Remember:
-
-</p>
-
-<ul>
-
-<li>Write 40–50 words.</li>
-
-<li>Use at least 2 adjectives.</li>
-
-<li>Use at least 2 connectors.</li>
-
-<li>Use Unit 3 vocabulary.</li>
-
-</ul>
-
-<textarea
-
-id="writing"
-
-placeholder="Write your paragraph here..."
-
-></textarea>
-
-</section>
-
-
-
-<!-- ===================================== -->
-<!-- LIVE CHECK -->
-<!-- ===================================== -->
-
-<section class="card">
-
-<h2>✔ Progress</h2>
-
-<div class="progress-item">
-
-<span>Words</span>
-
-<span id="wordCounter">0 / 40</span>
-
-</div>
-
-<div class="progress-item">
-
-<span>Adjectives</span>
-
-<span id="adjCounter">0 / 2</span>
-
-</div>
-
-<div class="progress-item">
-
-<span>Connectors</span>
-
-<span id="connectorCounter">0 / 2</span>
-
-</div>
-
-</section>
-
-
-
-<!-- ===================================== -->
-<!-- PREVIEW -->
-<!-- ===================================== -->
-
-<section class="card">
-
-<h2>👀 Preview</h2>
-
-<div id="preview">
-
-Your writing will appear here...
-
-</div>
-
-</section>
-
-
-
-<!-- ===================================== -->
-<!-- BUTTONS -->
-<!-- ===================================== -->
-
-<section class="buttons">
-
-<button id="reviewButton">
-
-Review
-
-</button>
-
-<button id="sendButton">
-
-Send to Teacher
-
-</button>
-
-</section>
-
-
-</main>
-
-
-
-<footer>
-
-<p>
-
-Harmonize 1 • Unit 3 • Homework
-
-</p>
-
-</footer>
-
-
-
-<script src="js/app.js"></script>
-
+    <!-- Vincula aquí tu archivo JavaScript actualizado -->
+    <script src="script.js"></script>
 </body>
-
 </html>
