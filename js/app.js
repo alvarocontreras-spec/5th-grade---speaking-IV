@@ -30,7 +30,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     let selectedSport = '';
 
-    // Función auxiliar para sanitizar cadenas de texto
+    // Función auxiliar para sanitizar HTML (Prevención XSS)
     const escapeHTML = (str) => str.replace(/[&<>'"]/g, tag => ({
         '&': '&amp;', '<': '&lt;', '>': '&gt;', "'": '&#39;', '"': '&quot;'
     }[tag] || tag));
@@ -63,43 +63,28 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-    // Añadir palabras al Word Bank
+    // Añadir palabras al Word Bank (solo como guía visual)
     wordButtons.forEach(button => {
         button.addEventListener('click', () => {
             const wordText = button.textContent.trim();
-            const existingWords = Array.from(wordBankContainer.children).map(el => el.textContent.trim());
+            const existingWords = Array.from(wordBankContainer.children).map(el => el.dataset.word);
 
             if (!existingWords.includes(wordText)) {
                 const newWordBtn = document.createElement('button');
                 newWordBtn.classList.add('word-chip');
-                newWordBtn.textContent = wordText;
+                newWordBtn.dataset.word = wordText;
+                newWordBtn.textContent = `${wordText} ✕`;
+                newWordBtn.title = "Click to remove from your word bank";
 
+                // Permitir al estudiante eliminar la palabra del Word Bank si la seleccionó por error
                 newWordBtn.addEventListener('click', () => {
-                    insertWordAtCursor(textarea, wordText);
-                    updateProgressAndPreview();
+                    newWordBtn.remove();
                 });
 
                 wordBankContainer.appendChild(newWordBtn);
             }
         });
     });
-
-    function insertWordAtCursor(input, text) {
-        const start = input.selectionStart;
-        const end = input.selectionEnd;
-        const currentText = input.value;
-
-        // Formatear espacios de forma limpia
-        const padBefore = (start > 0 && currentText[start - 1] !== ' ') ? ' ' : '';
-        const padAfter = (end < currentText.length && currentText[end] !== ' ') ? ' ' : '';
-
-        const inserted = padBefore + text + padAfter;
-        input.value = currentText.substring(0, start) + inserted + currentText.substring(end);
-        input.focus();
-        
-        const newCursorPos = start + inserted.length;
-        input.selectionStart = input.selectionEnd = newCursorPos;
-    }
 
     // Actualización de contadores y revisión de requerimientos
     function updateProgressAndPreview() {
@@ -129,7 +114,7 @@ document.addEventListener('DOMContentLoaded', () => {
         updatePreview();
     }
 
-    // Actualizar vista previa de forma segura (Previene XSS)
+    // Actualizar vista previa de forma segura
     function updatePreview() {
         const text = textarea.value.trim();
         const studentName = studentSelect.value;
@@ -158,7 +143,7 @@ document.addEventListener('DOMContentLoaded', () => {
             preview.appendChild(document.createElement('hr'));
             const textP = document.createElement('p');
             textP.style.whiteSpace = 'pre-wrap';
-            textP.textContent = text; // Asignación segura
+            textP.textContent = text;
             preview.appendChild(textP);
         }
     }
