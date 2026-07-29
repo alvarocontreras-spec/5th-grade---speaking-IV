@@ -70,7 +70,7 @@
 
         /* Tareas */
         .task-section {
-            display: grid; grid-template-columns: 1fr 1fr; gap: 30px; margin-bottom: 30px;
+            display: grid; grid-template-columns: 1fr 1fr; gap: 30px; margin-bottom: 25px;
         }
 
         .task-card {
@@ -99,38 +99,47 @@
             font-size: 0.85rem;
             font-weight: bold;
             text-align: right;
-            margin-bottom: 15px;
+            margin-bottom: 5px;
             color: var(--error);
         }
         .live-counter.goal-met { color: var(--success); }
 
-        /* Recorder Box */
-        .recorder-box {
+        /* Grabador único */
+        .single-recorder-box {
             background: #ffffff;
-            border: 1px solid #cbd5e1;
-            padding: 12px;
-            border-radius: 10px;
-            margin-top: auto;
+            border: 2px solid var(--oxford-gold);
+            padding: 20px;
+            border-radius: 15px;
+            margin-bottom: 25px;
             text-align: center;
         }
 
         .recorder-title {
-            font-size: 0.85rem;
+            font-size: 1.1rem;
             font-weight: bold;
             color: var(--oxford-blue);
-            margin-bottom: 8px;
+            margin-bottom: 5px;
+        }
+
+        .recorder-subtitle {
+            font-size: 0.85rem;
+            color: #666;
+            margin-bottom: 15px;
         }
 
         .rec-btn {
             background: var(--recording-red);
             color: white;
             border: none;
-            padding: 8px 15px;
-            border-radius: 20px;
-            font-size: 0.85rem;
+            padding: 12px 25px;
+            border-radius: 25px;
+            font-size: 1rem;
             font-weight: bold;
             cursor: pointer;
             transition: 0.2s;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
         }
 
         .rec-btn.recording {
@@ -145,8 +154,9 @@
 
         audio {
             width: 100%;
-            margin-top: 10px;
-            height: 35px;
+            max-width: 500px;
+            margin-top: 15px;
+            height: 40px;
         }
 
         button.btn-primary {
@@ -194,7 +204,7 @@
 <body>
 
 <div class="container">
-    <!-- MAIN SCREEN -->
+    <!-- PANTALLA PRINCIPAL -->
     <div class="card" id="writingScreen">
         <div class="header-logo">🗣️ SPEAKING TASK: SPORTS & COMPARATIVES</div>
 
@@ -210,7 +220,7 @@
             </select>
         </div>
 
-        <!-- WORD BANK FOR SPEAKING -->
+        <!-- BANCO DE PALABRAS -->
         <div class="word-bank">
             <div class="word-category">
                 <h4>🎙️ Speaking Starters</h4>
@@ -245,48 +255,42 @@
             </div>
         </div>
 
+        <!-- GUIONES DE PREPARACIÓN -->
         <div class="task-section">
-            <!-- TASK 1 -->
             <div class="task-card">
                 <h3 style="text-align: center; color: var(--oxford-blue); margin-top:0;">Task 1: Oral Comparison</h3>
-                <p style="font-size: 0.8rem; color: #666; text-align: center; margin-top:-5px;">Compare two sports using comparative adjectives.</p>
+                <p style="font-size: 0.8rem; color: #666; text-align: center; margin-top:-5px;">Script to compare two sports using comparatives.</p>
                 <div class="image-container">
                     <img src="https://images.unsplash.com/photo-1546519638-68e109498ffc?q=80&w=800&auto=format&fit=crop" alt="Basketball vs Tennis comparison">
                 </div>
                 <textarea id="textTask1" oninput="updateLiveCount('textTask1', 'liveTask1')" placeholder="Write your speech script here... Example: In my opinion, basketball is faster than tennis. Basketball players are taller than..."></textarea>
                 <div id="liveTask1" class="live-counter">Words: 0 / 20</div>
-
-                <!-- AUDIO RECORDER TASK 1 -->
-                <div class="recorder-box">
-                    <div class="recorder-title">🎙️ Practice Recording Task 1</div>
-                    <button class="rec-btn" id="btnRec1" onclick="toggleRecord(1)">🔴 Start Recording</button>
-                    <audio id="audioTask1" controls style="display:none;"></audio>
-                </div>
             </div>
 
-            <!-- TASK 2 -->
             <div class="task-card">
                 <h3 style="text-align: center; color: var(--oxford-blue); margin-top:0;">Task 2: Sports Superlatives</h3>
-                <p style="font-size: 0.8rem; color: #666; text-align: center; margin-top:-5px;">Present the best or most popular sports using superlatives.</p>
+                <p style="font-size: 0.8rem; color: #666; text-align: center; margin-top:-5px;">Script to present the best sports using superlatives.</p>
                 <div class="image-container">
                     <img src="https://images.unsplash.com/photo-1461896836934-ffe607ba8211?q=80&w=800&auto=format&fit=crop" alt="Sports Champions Podium">
                 </div>
                 <textarea id="textTask2" oninput="updateLiveCount('textTask2', 'liveTask2')" placeholder="Write your speech script here... Example: Football is the most popular sport in the world. I think running is the healthiest sport..."></textarea>
                 <div id="liveTask2" class="live-counter">Words: 0 / 20</div>
-
-                <!-- AUDIO RECORDER TASK 2 -->
-                <div class="recorder-box">
-                    <div class="recorder-title">🎙️ Practice Recording Task 2</div>
-                    <button class="rec-btn" id="btnRec2" onclick="toggleRecord(2)">🔴 Start Recording</button>
-                    <audio id="audioTask2" controls style="display:none;"></audio>
-                </div>
             </div>
+        </div>
+
+        <!-- UNICO GRABADOR DE AUDIO -->
+        <div class="single-recorder-box">
+            <div class="recorder-title">🎙️ Record Your Full Audio Presentation</div>
+            <div class="recorder-subtitle">Read your complete script out loud (Task 1 + Task 2) in ONE single recording.</div>
+            <button class="rec-btn" id="btnRec" onclick="toggleRecord()">🔴 Start Recording Audio</button>
+            <br>
+            <audio id="audioFullSpeech" controls style="display:none;"></audio>
         </div>
 
         <button class="btn-primary" onclick="showReview()">🔍 Review My Speaking Preparation</button>
     </div>
 
-    <!-- REVIEW SCREEN -->
+    <!-- PANTALLA DE REVISIÓN -->
     <div class="card" id="reviewScreen">
         <div class="header-logo">CHECK & PRACTICE YOUR SPEECH</div>
         <div class="review-box">
@@ -296,7 +300,7 @@
         <div class="feedback-guide">
             <h4 style="margin-top:0; color: var(--oxford-blue);">🗣️ Speaking Checklist:</h4>
             <ul style="margin-bottom:0;">
-                <li>Did you practice <strong>reading your script out loud</strong> clearly?</li>
+                <li>Did you practice <strong>reading your full script</strong> clearly?</li>
                 <li>Did you use <strong>comparative adjectives</strong> (<em>...than...</em>) in Task 1?</li>
                 <li>Did you use <strong>superlative adjectives</strong> (<em>the most... / the -est</em>) in Task 2?</li>
             </ul>
@@ -314,7 +318,7 @@
         </div>
     </div>
 
-    <!-- FINAL SCREEN -->
+    <!-- PANTALLA FINAL -->
     <div class="card" id="finalMessage" style="text-align: center;">
         <div style="font-size: 5rem; color: var(--success);">🎉</div>
         <h1 style="color: var(--oxford-blue);">EXCELLENT SPEAKING PREPARATION!</h1>
@@ -335,7 +339,7 @@
         else { counter.classList.remove('goal-met'); }
     }
 
-    // Estudiantes por curso
+    // Estudiantes
     const students = {
         "5thA": ["ARANEDA SEPÚLVEDA MATÍAS SANTIAGO", "AYALA OLIVARES MÁXIMO ALONSO", "CAMPUSANO PÉREZ ISIDORA MONTSERRAT", "CANESSA VEGA BERNARDO FRANCISCO", "CARRASCO RAMÍREZ JAVIERA PAZ", "CHAMORRO SAN MARTÍN SEBASTIÁN FRANCISCO", "CORREA LEAL SANTIAGO LEÓN", "CUKIC LUENGO BRUNO EDUARDO", "ESPINOZA OLIVARES LUCAS ALEJANDRO", "FERNÁNDEZ ESCOBAR MARTÍN FELIPE", "FERNÁNDEZ RODRIGUEZ FERNANDA NICOLE", "GARNIER VELÁSQUEZ MAXIMILIANO LORENZO", "GARZON MACUER AMANDA SOFÍA", "GONZÁLEZ ARRIAGADA SOFÍA ISIDORA", "IBARRA BARRAZA DOMINGA PAZ", "JARAMILLO CANALES JULIETA ANTONIA", "JIMÉNEZ MONSALVES FERNANDA PAZ", "MACUADA GONZÁLEZ TOMÁS ALONSO", "MEZA MISTO FRANCISCA IGNACIA", "MUÑOZ OLIVOS SOFÍA ANTONIA", "NECULQUEO MURA JAVIER MATIAS", "OSORIO MUÑOZ LUCIANO", "PARRA ALIAGA AGUSTÍN CLEMENTE LEÓN", "RIQUELME CONTRERAS JULIETA ISADORA", "SALINAS SAAVEDRA EMILIANO IGNACIO", "SÁNCHEZ MORAGA NICOLÁS ARTURO", "SEISDEDOS CARVAJAL ANGELA GUADALUPE", "SEREY VALDES RENATO CLEMENTE", "SEYMOUR REYES TRINIDAD EMILIA", "VALLEJOS NAVARRO JOSEFA AGUSTINA", "VELOSO MUÑOZ ISABELLA AMARAL", "VERGARA FUENZALIDA JOAQUÍN IGNACIO", "VERGARA MARÍN DAMIÁN ALONSO", "VINES ZÚÑIGA DAMIÁN ALBERTO", "ZURITA BUSTOS ANTONIA INÉS"],
         "5thB": ["ACUÑA ALARCÓN DOMINGO", "AGUILAR MENARES VALENTÍN IGNACIO", "ALLENDE GARAY ALFONSO ERNESTO", "ARA CAMPUSANO VALENTINA ANTONIA", "ARAYA ESCALONA JOSE MANUEL", "ÁVILA RAMÍREZ AMANDA", "BOBADILLA PONCE VICENTE IGNACIO", "CASTILLO CARVAJAL TRINIDAD PAZ", "CONTRERAS RAMOS AMANDA BELÉN", "DÍAZ CORTÉS NICOLÁS IGNACIO", "DURÁN FREZ FLORENCIA CATALINA", "FARÍAS VALENZUELA REBECCA ESPERANZA", "GARRIDO DONOSO AMANDA", "GÓMEZ BURGOS ROSARIO BELÉN", "GONZÁLEZ ESPINOZA ARANTZA MICAELA", "HOLZMANN CÁRCAMO ANTONIA IGNACIA", "LAZO DÍAZ RENATA ANDREA", "LÓPEZ OJEDA AGUSTÍN SANTIAGO", "MENESES MADARIAGA GASPAR BAUTISTA", "MORAGA MARTINEZ VICTORIA ESPERANZA", "MOSQUEIRA VALDIVIA CAMILO ANDRÉS", "ORMEÑO LACHR PEDRO JOAQUIN", "OSORNO ARRIAGADA AMANDA MARIANNE", "PARRA PIMENTEL CONSUELO EMILIA", "REYES MARCHANT EMILIANO BAUTISTA", "RIVERA SAAVEDRA DIEGO ANDRÉS", "ROMÁN PEÑA GUSTAVO EMILIO", "RUIZ GARCÍA SANTIAGO ALONSO", "RUZ REYES MATÍAS ALEJANDRO", "SARRIA ASTUDILLO EVA MAGDALENA", "TRUJILLO BURGOS SANTIAGO ALONSO", "URQUEJO CHACANO RAFAELA", "VALENZUELA GONZÁLEZ JOSÉ MIGUEL", "VÁSQUEZ TAPIA SOFÍA ANTONIA", "VILLANUEVA SIMON GASPAR ALBERTO", "ZAMORA TORRES FACUNDO AGUSTÍN"],
@@ -411,43 +415,43 @@
         document.getElementById('finalMessage').style.display = 'block';
     }
 
-    // LÓGICA DE GRABACIÓN DE VOZ (MediaRecorder API)
-    let mediaRecorders = { 1: null, 2: null };
-    let audioChunks = { 1: [], 2: [] };
-    let isRecording = { 1: false, 2: false };
+    // UNICO GRABADOR DE AUDIO (MediaRecorder API)
+    let mediaRecorder = null;
+    let audioChunks = [];
+    let isRecording = false;
 
-    async function toggleRecord(taskNum) {
-        const btn = document.getElementById(`btnRec${taskNum}`);
-        const audioElem = document.getElementById(`audioTask${taskNum}`);
+    async function toggleRecord() {
+        const btn = document.getElementById('btnRec');
+        const audioElem = document.getElementById('audioFullSpeech');
 
-        if (!isRecording[taskNum]) {
+        if (!isRecording) {
             try {
                 const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
-                mediaRecorders[taskNum] = new MediaRecorder(stream);
-                audioChunks[taskNum] = [];
+                mediaRecorder = new MediaRecorder(stream);
+                audioChunks = [];
 
-                mediaRecorders[taskNum].ondataavailable = e => {
-                    if (e.data.size > 0) audioChunks[taskNum].push(e.data);
+                mediaRecorder.ondataavailable = e => {
+                    if (e.data.size > 0) audioChunks.push(e.data);
                 };
 
-                mediaRecorders[taskNum].onstop = () => {
-                    const audioBlob = new Blob(audioChunks[taskNum], { type: 'audio/webm' });
+                mediaRecorder.onstop = () => {
+                    const audioBlob = new Blob(audioChunks, { type: 'audio/webm' });
                     const audioUrl = URL.createObjectURL(audioBlob);
                     audioElem.src = audioUrl;
-                    audioElem.style.display = 'block';
+                    audioElem.style.display = 'inline-block';
                 };
 
-                mediaRecorders[taskNum].start();
-                isRecording[taskNum] = true;
-                btn.textContent = "⏹️ Stop Recording";
+                mediaRecorder.start();
+                isRecording = true;
+                btn.textContent = "⏹️ Stop Recording Audio";
                 btn.classList.add("recording");
             } catch (err) {
                 alert("Microphone access denied or not supported by your browser.");
             }
         } else {
-            mediaRecorders[taskNum].stop();
-            isRecording[taskNum] = false;
-            btn.textContent = "🔄 Record Again";
+            mediaRecorder.stop();
+            isRecording = false;
+            btn.textContent = "🔄 Record Audio Again";
             btn.classList.remove("recording");
         }
     }
