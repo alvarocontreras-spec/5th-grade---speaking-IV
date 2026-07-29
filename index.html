@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SPEAKING TASK - Sports & Comparatives A2</title>
+    <title>SPEAKING TASK - Sports Oral Presentation</title>
     <style>
         :root {
             --oxford-blue: #002147;
@@ -12,6 +12,7 @@
             --success: #10b981;
             --error: #ef4444;
             --wordbank-bg: #eef2ff;
+            --model-bg: #f0fdf4;
             --review-light: #fffcf0;
             --recording-red: #dc2626;
         }
@@ -33,6 +34,7 @@
             border-radius: 20px;
             box-shadow: 0 10px 25px rgba(0,0,0,0.05);
             border-top: 8px solid var(--oxford-blue);
+            margin-bottom: 25px;
         }
 
         .header-logo {
@@ -52,6 +54,30 @@
             border: 2px solid #e2e8f0; font-size: 1rem; outline: none;
         }
 
+        /* Model Answer Box */
+        .model-box {
+            background: var(--model-bg);
+            border: 2px solid #bbf7d0;
+            border-radius: 15px;
+            padding: 18px;
+            margin-bottom: 25px;
+        }
+        .model-title {
+            font-weight: bold;
+            color: #166534;
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            cursor: pointer;
+        }
+        .model-content {
+            font-style: italic;
+            color: #14532d;
+            line-height: 1.5;
+            font-size: 0.95rem;
+        }
+
         /* Word Bank */
         .word-bank {
             background: var(--wordbank-bg);
@@ -60,37 +86,58 @@
             padding: 20px;
             margin-bottom: 30px;
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
             gap: 15px;
         }
 
-        .word-category h4 { margin: 0 0 5px 0; color: var(--oxford-blue); font-size: 0.9rem; text-transform: uppercase; }
-        .word-list { font-size: 0.85rem; color: #475569; line-height: 1.4; }
-        .highlight-word { color: #2563eb; font-weight: bold; }
-
-        /* Tareas */
-        .task-section {
-            display: grid; grid-template-columns: 1fr 1fr; gap: 30px; margin-bottom: 25px;
+        .word-category h4 { margin: 0 0 8px 0; color: var(--oxford-blue); font-size: 0.9rem; text-transform: uppercase; }
+        .word-list { font-size: 0.85rem; color: #475569; line-height: 1.5; }
+        .tag {
+            display: inline-block;
+            background: #dbeafe;
+            color: #1e40af;
+            padding: 2px 8px;
+            border-radius: 12px;
+            font-weight: 600;
+            margin: 2px;
+            font-size: 0.8rem;
         }
 
-        .task-card {
-            background: #f8fafc; padding: 20px; border-radius: 15px;
+        /* Parts Sections */
+        .part-card {
+            background: #f8fafc;
+            padding: 20px;
+            border-radius: 15px;
             border: 1px solid #e2e8f0;
-            display: flex;
-            flex-direction: column;
+            margin-bottom: 25px;
         }
 
-        .image-container img {
-            width: 100%; height: 220px; object-fit: cover;
-            border-radius: 12px; border: 4px solid var(--oxford-gold);
+        .part-header {
+            color: var(--oxford-blue);
+            margin-top: 0;
             margin-bottom: 10px;
-            background-color: #eee;
+            border-bottom: 2px solid var(--oxford-gold);
+            padding-bottom: 5px;
+            display: inline-block;
         }
+
+        .questions-list {
+            background: #ffffff;
+            border-left: 4px solid var(--oxford-gold);
+            padding: 12px 15px;
+            border-radius: 0 10px 10px 0;
+            margin-bottom: 15px;
+            font-size: 0.9rem;
+            color: #334155;
+        }
+
+        .questions-list ol, .questions-list ul { margin: 0; padding-left: 20px; }
+        .questions-list li { margin-bottom: 5px; }
 
         textarea {
-            width: 100%; height: 130px; padding: 12px;
+            width: 100%; height: 120px; padding: 12px;
             border: 2px solid #e2e8f0; border-radius: 10px;
-            font-size: 0.95rem; resize: none; box-sizing: border-box;
+            font-size: 0.95rem; resize: vertical; box-sizing: border-box;
             font-family: inherit; outline: none;
             margin-bottom: 5px;
         }
@@ -104,25 +151,25 @@
         }
         .live-counter.goal-met { color: var(--success); }
 
-        /* Grabador único */
+        /* Single Recorder */
         .single-recorder-box {
             background: #ffffff;
             border: 2px solid var(--oxford-gold);
-            padding: 20px;
+            padding: 25px;
             border-radius: 15px;
             margin-bottom: 25px;
             text-align: center;
         }
 
         .recorder-title {
-            font-size: 1.1rem;
+            font-size: 1.2rem;
             font-weight: bold;
             color: var(--oxford-blue);
             margin-bottom: 5px;
         }
 
         .recorder-subtitle {
-            font-size: 0.85rem;
+            font-size: 0.9rem;
             color: #666;
             margin-bottom: 15px;
         }
@@ -131,7 +178,7 @@
             background: var(--recording-red);
             color: white;
             border: none;
-            padding: 12px 25px;
+            padding: 12px 30px;
             border-radius: 25px;
             font-size: 1rem;
             font-weight: bold;
@@ -175,11 +222,6 @@
             border-left: 6px solid var(--oxford-gold); margin-bottom: 20px;
         }
 
-        .feedback-guide {
-            background: #eef2ff; padding: 15px; border-radius: 10px;
-            margin-bottom: 20px; font-size: 0.9rem; border: 1px solid #d1dbff;
-        }
-
         .review-text {
             background: white; padding: 15px; border-radius: 8px;
             border: 1px solid #e2e8f0; margin: 10px 0 15px 0;
@@ -195,7 +237,6 @@
         }
 
         @media (max-width: 750px) {
-            .task-section { grid-template-columns: 1fr; }
             .student-inputs { flex-direction: column; }
             .action-buttons button { width: 100%; }
         }
@@ -204,10 +245,11 @@
 <body>
 
 <div class="container">
-    <!-- PANTALLA PRINCIPAL -->
+    <!-- MAIN WRITING & RECORDING SCREEN -->
     <div class="card" id="writingScreen">
-        <div class="header-logo">🗣️ SPEAKING TASK: SPORTS & COMPARATIVES</div>
+        <div class="header-logo">🗣️ SPEAKING TASK: SPORTS ORAL PRESENTATION</div>
 
+        <!-- STUDENT SELECTOR -->
         <div class="student-inputs">
             <select id="sClass" onchange="updateStudentList()">
                 <option value="">-- Select Class --</option>
@@ -220,97 +262,117 @@
             </select>
         </div>
 
-        <!-- BANCO DE PALABRAS -->
+        <!-- MODEL ANSWER -->
+        <div class="model-box">
+            <div class="model-title">💡 Sample Model Answer (Example Presentation)</div>
+            <div class="model-content">
+                "My favorite sport is volleyball because it is exciting and I enjoy playing with my friends. I usually practice twice a week after school. We play in the school gym, and we need a volleyball and sports shoes. I think volleyball helps me stay healthy because it keeps me active and improves my teamwork. I prefer team sports because I like working with other people. In my opinion, children should play sports every week because exercise is good for their health. In the future, I would like to learn surfing because I love the ocean and I think it looks exciting."
+            </div>
+        </div>
+
+        <!-- USEFUL VOCABULARY BANK -->
         <div class="word-bank">
             <div class="word-category">
-                <h4>🎙️ Speaking Starters</h4>
-                <div class="word-list">
-                    <span class="highlight-word">Hello teacher, today I'm presenting...</span><br>
-                    <span class="highlight-word">In my opinion...</span><br>
-                    <span class="highlight-word">I think that...</span><br>
-                    <span class="highlight-word">For example...</span>
-                </div>
-            </div>
-            <div class="word-category">
                 <h4>⚽ Sports</h4>
-                <div class="word-list">Football, Basketball, Tennis, Swimming, Running, Cycling, Volleyball.</div>
-            </div>
-            <div class="word-category">
-                <h4>⚡ Short Adjectives</h4>
                 <div class="word-list">
-                    Fast &rarr; <span class="highlight-word">faster / fastest</span><br>
-                    Tall &rarr; <span class="highlight-word">taller / tallest</span><br>
-                    Easy &rarr; <span class="highlight-word">easier / easiest</span><br>
-                    Strong &rarr; <span class="highlight-word">stronger / strongest</span>
+                    <span class="tag">soccer</span> <span class="tag">basketball</span> <span class="tag">volleyball</span> 
+                    <span class="tag">tennis</span> <span class="tag">swimming</span> <span class="tag">running</span> 
+                    <span class="tag">cycling</span> <span class="tag">athletics</span> <span class="tag">gymnastics</span> 
+                    <span class="tag">table tennis</span>
                 </div>
             </div>
             <div class="word-category">
-                <h4>🌟 Long & Irregular</h4>
+                <h4>⭐ Adjectives</h4>
                 <div class="word-list">
-                    Exciting &rarr; <span class="highlight-word">more exciting</span><br>
-                    Popular &rarr; <span class="highlight-word">more popular</span><br>
-                    Good &rarr; <span class="highlight-word">better / the best</span><br>
-                    Bad &rarr; <span class="highlight-word">worse / the worst</span>
+                    <span class="tag">exciting</span> <span class="tag">challenging</span> <span class="tag">relaxing</span> 
+                    <span class="tag">healthy</span> <span class="tag">interesting</span> <span class="tag">popular</span> 
+                    <span class="tag">fast</span> <span class="tag">difficult</span> <span class="tag">enjoyable</span> 
+                    <span class="tag">competitive</span>
+                </div>
+            </div>
+            <div class="word-category">
+                <h4>🎙️ Key Expressions</h4>
+                <div class="word-list">
+                    <span class="tag">I enjoy...</span> <span class="tag">I prefer...</span> <span class="tag">I think...</span> 
+                    <span class="tag">In my opinion...</span> <span class="tag">I usually...</span> <span class="tag">I would like to...</span> 
+                    <span class="tag">I should...</span> <span class="tag">because...</span> <span class="tag">for example...</span>
                 </div>
             </div>
         </div>
 
-        <!-- GUIONES DE PREPARACIÓN -->
-        <div class="task-section">
-            <div class="task-card">
-                <h3 style="text-align: center; color: var(--oxford-blue); margin-top:0;">Task 1: Oral Comparison</h3>
-                <p style="font-size: 0.8rem; color: #666; text-align: center; margin-top:-5px;">Script to compare two sports using comparatives.</p>
-                <div class="image-container">
-                    <img src="https://images.unsplash.com/photo-1546519638-68e109498ffc?q=80&w=800&auto=format&fit=crop" alt="Basketball vs Tennis comparison">
-                </div>
-                <textarea id="textTask1" oninput="updateLiveCount('textTask1', 'liveTask1')" placeholder="Write your speech script here... Example: In my opinion, basketball is faster than tennis. Basketball players are taller than..."></textarea>
-                <div id="liveTask1" class="live-counter">Words: 0 / 20</div>
+        <!-- PART 1 -->
+        <div class="part-card">
+            <h3 class="part-header">Part 1 – Personal Questions</h3>
+            <div class="questions-list">
+                <ol>
+                    <li>What is your favorite sport? Why?</li>
+                    <li>How often do you play or practice it?</li>
+                    <li>Where do you usually play it?</li>
+                    <li>Who do you usually play with?</li>
+                    <li>What equipment do you need?</li>
+                    <li>How does this sport help you stay healthy?</li>
+                </ol>
             </div>
-
-            <div class="task-card">
-                <h3 style="text-align: center; color: var(--oxford-blue); margin-top:0;">Task 2: Sports Superlatives</h3>
-                <p style="font-size: 0.8rem; color: #666; text-align: center; margin-top:-5px;">Script to present the best sports using superlatives.</p>
-                <div class="image-container">
-                    <img src="https://images.unsplash.com/photo-1461896836934-ffe607ba8211?q=80&w=800&auto=format&fit=crop" alt="Sports Champions Podium">
-                </div>
-                <textarea id="textTask2" oninput="updateLiveCount('textTask2', 'liveTask2')" placeholder="Write your speech script here... Example: Football is the most popular sport in the world. I think running is the healthiest sport..."></textarea>
-                <div id="liveTask2" class="live-counter">Words: 0 / 20</div>
-            </div>
+            <textarea id="textPart1" oninput="updateLiveCount('textPart1', 'livePart1')" placeholder="Write your answers for Part 1 in complete sentences..."></textarea>
+            <div id="livePart1" class="live-counter">Words: 0 / 25</div>
         </div>
 
-        <!-- UNICO GRABADOR DE AUDIO -->
+        <!-- PART 2 -->
+        <div class="part-card">
+            <h3 class="part-header">Part 2 – Comparing Sports</h3>
+            <div class="questions-list">
+                <ol>
+                    <li>Which is more exciting: playing sports or watching sports?</li>
+                    <li>Which sport is more difficult: tennis or soccer? Why?</li>
+                    <li>Do you prefer team sports or individual sports? Explain your answer.</li>
+                </ol>
+            </div>
+            <textarea id="textPart2" oninput="updateLiveCount('textPart2', 'livePart2')" placeholder="Write your answers for Part 2 with reasons..."></textarea>
+            <div id="livePart2" class="live-counter">Words: 0 / 20</div>
+        </div>
+
+        <!-- PART 3 -->
+        <div class="part-card">
+            <h3 class="part-header">Part 3 – Giving Opinions</h3>
+            <div class="questions-list">
+                <p><em>Use <strong>because</strong>, <strong>should</strong>, or <strong>would like to</strong>:</em></p>
+                <ol>
+                    <li>Do you think children should play sports every week? Why?</li>
+                    <li>What sport would you like to learn in the future? Why?</li>
+                    <li>Who is your favorite athlete or sports team? What do you like about them?</li>
+                </ol>
+            </div>
+            <textarea id="textPart3" oninput="updateLiveCount('textPart3', 'livePart3')" placeholder="Write your answers for Part 3 giving clear opinions..."></textarea>
+            <div id="livePart3" class="live-counter">Words: 0 / 20</div>
+        </div>
+
+        <!-- SINGLE AUDIO RECORDER -->
         <div class="single-recorder-box">
-            <div class="recorder-title">🎙️ Record Your Full Audio Presentation</div>
-            <div class="recorder-subtitle">Read your complete script out loud (Task 1 + Task 2) in ONE single recording.</div>
-            <button class="rec-btn" id="btnRec" onclick="toggleRecord()">🔴 Start Recording Audio</button>
+            <div class="recorder-title">🎙️ Record Your Full Presentation</div>
+            <div class="recorder-subtitle">Read your complete script out loud (Part 1 + Part 2 + Part 3) in ONE single audio recording.</div>
+            <button class="rec-btn" id="btnRec" onclick="toggleRecord()">🔴 Start Recording Presentation</button>
             <br>
             <audio id="audioFullSpeech" controls style="display:none;"></audio>
         </div>
 
-        <button class="btn-primary" onclick="showReview()">🔍 Review My Speaking Preparation</button>
+        <button class="btn-primary" onclick="showReview()">🔍 Review My Oral Presentation Preparation</button>
     </div>
 
-    <!-- PANTALLA DE REVISIÓN -->
+    <!-- REVIEW SCREEN -->
     <div class="card" id="reviewScreen">
         <div class="header-logo">CHECK & PRACTICE YOUR SPEECH</div>
         <div class="review-box">
             <strong>Student:</strong> <span id="revName"></span> | <strong>Class:</strong> <span id="revClass"></span>
         </div>
 
-        <div class="feedback-guide">
-            <h4 style="margin-top:0; color: var(--oxford-blue);">🗣️ Speaking Checklist:</h4>
-            <ul style="margin-bottom:0;">
-                <li>Did you practice <strong>reading your full script</strong> clearly?</li>
-                <li>Did you use <strong>comparative adjectives</strong> (<em>...than...</em>) in Task 1?</li>
-                <li>Did you use <strong>superlative adjectives</strong> (<em>the most... / the -est</em>) in Task 2?</li>
-            </ul>
-        </div>
+        <p><strong>Part 1 (Personal Questions):</strong></p>
+        <div class="review-text" id="revPart1"></div>
 
-        <p><strong>Speaking Script 1 (Comparing Sports):</strong></p>
-        <div class="review-text" id="revTask1"></div>
+        <p><strong>Part 2 (Comparing Sports):</strong></p>
+        <div class="review-text" id="revPart2"></div>
 
-        <p><strong>Speaking Script 2 (Sports Superlatives):</strong></p>
-        <div class="review-text" id="revTask2"></div>
+        <p><strong>Part 3 (Giving Opinions):</strong></p>
+        <div class="review-text" id="revPart3"></div>
 
         <div class="action-buttons">
             <button class="btn-edit" onclick="goBackAndEdit()">✏️ Edit Script</button>
@@ -318,7 +380,7 @@
         </div>
     </div>
 
-    <!-- PANTALLA FINAL -->
+    <!-- FINAL SCREEN -->
     <div class="card" id="finalMessage" style="text-align: center;">
         <div style="font-size: 5rem; color: var(--success);">🎉</div>
         <h1 style="color: var(--oxford-blue);">EXCELLENT SPEAKING PREPARATION!</h1>
@@ -329,17 +391,18 @@
 </div>
 
 <script>
-    // Contador de palabras
+    // Live Word Counter
     function updateLiveCount(textId, counterId) {
         const text = document.getElementById(textId).value.trim();
         const counter = document.getElementById(counterId);
+        const minWords = counterId === 'livePart1' ? 25 : 20;
         const words = text === "" ? 0 : text.split(/\s+/).length;
-        counter.textContent = `Words: ${words} / 20`;
-        if(words >= 20) { counter.classList.add('goal-met'); } 
+        counter.textContent = `Words: ${words} / ${minWords}`;
+        if(words >= minWords) { counter.classList.add('goal-met'); } 
         else { counter.classList.remove('goal-met'); }
     }
 
-    // Estudiantes
+    // Student Roster
     const students = {
         "5thA": ["ARANEDA SEPÚLVEDA MATÍAS SANTIAGO", "AYALA OLIVARES MÁXIMO ALONSO", "CAMPUSANO PÉREZ ISIDORA MONTSERRAT", "CANESSA VEGA BERNARDO FRANCISCO", "CARRASCO RAMÍREZ JAVIERA PAZ", "CHAMORRO SAN MARTÍN SEBASTIÁN FRANCISCO", "CORREA LEAL SANTIAGO LEÓN", "CUKIC LUENGO BRUNO EDUARDO", "ESPINOZA OLIVARES LUCAS ALEJANDRO", "FERNÁNDEZ ESCOBAR MARTÍN FELIPE", "FERNÁNDEZ RODRIGUEZ FERNANDA NICOLE", "GARNIER VELÁSQUEZ MAXIMILIANO LORENZO", "GARZON MACUER AMANDA SOFÍA", "GONZÁLEZ ARRIAGADA SOFÍA ISIDORA", "IBARRA BARRAZA DOMINGA PAZ", "JARAMILLO CANALES JULIETA ANTONIA", "JIMÉNEZ MONSALVES FERNANDA PAZ", "MACUADA GONZÁLEZ TOMÁS ALONSO", "MEZA MISTO FRANCISCA IGNACIA", "MUÑOZ OLIVOS SOFÍA ANTONIA", "NECULQUEO MURA JAVIER MATIAS", "OSORIO MUÑOZ LUCIANO", "PARRA ALIAGA AGUSTÍN CLEMENTE LEÓN", "RIQUELME CONTRERAS JULIETA ISADORA", "SALINAS SAAVEDRA EMILIANO IGNACIO", "SÁNCHEZ MORAGA NICOLÁS ARTURO", "SEISDEDOS CARVAJAL ANGELA GUADALUPE", "SEREY VALDES RENATO CLEMENTE", "SEYMOUR REYES TRINIDAD EMILIA", "VALLEJOS NAVARRO JOSEFA AGUSTINA", "VELOSO MUÑOZ ISABELLA AMARAL", "VERGARA FUENZALIDA JOAQUÍN IGNACIO", "VERGARA MARÍN DAMIÁN ALONSO", "VINES ZÚÑIGA DAMIÁN ALBERTO", "ZURITA BUSTOS ANTONIA INÉS"],
         "5thB": ["ACUÑA ALARCÓN DOMINGO", "AGUILAR MENARES VALENTÍN IGNACIO", "ALLENDE GARAY ALFONSO ERNESTO", "ARA CAMPUSANO VALENTINA ANTONIA", "ARAYA ESCALONA JOSE MANUEL", "ÁVILA RAMÍREZ AMANDA", "BOBADILLA PONCE VICENTE IGNACIO", "CASTILLO CARVAJAL TRINIDAD PAZ", "CONTRERAS RAMOS AMANDA BELÉN", "DÍAZ CORTÉS NICOLÁS IGNACIO", "DURÁN FREZ FLORENCIA CATALINA", "FARÍAS VALENZUELA REBECCA ESPERANZA", "GARRIDO DONOSO AMANDA", "GÓMEZ BURGOS ROSARIO BELÉN", "GONZÁLEZ ESPINOZA ARANTZA MICAELA", "HOLZMANN CÁRCAMO ANTONIA IGNACIA", "LAZO DÍAZ RENATA ANDREA", "LÓPEZ OJEDA AGUSTÍN SANTIAGO", "MENESES MADARIAGA GASPAR BAUTISTA", "MORAGA MARTINEZ VICTORIA ESPERANZA", "MOSQUEIRA VALDIVIA CAMILO ANDRÉS", "ORMEÑO LACHR PEDRO JOAQUIN", "OSORNO ARRIAGADA AMANDA MARIANNE", "PARRA PIMENTEL CONSUELO EMILIA", "REYES MARCHANT EMILIANO BAUTISTA", "RIVERA SAAVEDRA DIEGO ANDRÉS", "ROMÁN PEÑA GUSTAVO EMILIO", "RUIZ GARCÍA SANTIAGO ALONSO", "RUZ REYES MATÍAS ALEJANDRO", "SARRIA ASTUDILLO EVA MAGDALENA", "TRUJILLO BURGOS SANTIAGO ALONSO", "URQUEJO CHACANO RAFAELA", "VALENZUELA GONZÁLEZ JOSÉ MIGUEL", "VÁSQUEZ TAPIA SOFÍA ANTONIA", "VILLANUEVA SIMON GASPAR ALBERTO", "ZAMORA TORRES FACUNDO AGUSTÍN"],
@@ -363,19 +426,23 @@
 
     function showReview() {
         const name = document.getElementById('sName').value;
-        const textTask1 = document.getElementById('textTask1').value.trim();
-        const textTask2 = document.getElementById('textTask2').value.trim();
+        const t1 = document.getElementById('textPart1').value.trim();
+        const t2 = document.getElementById('textPart2').value.trim();
+        const t3 = document.getElementById('textPart3').value.trim();
         
-        const wordsTask1 = textTask1 === "" ? 0 : textTask1.split(/\s+/).length;
-        const wordsTask2 = textTask2 === "" ? 0 : textTask2.split(/\s+/).length;
+        const w1 = t1 === "" ? 0 : t1.split(/\s+/).length;
+        const w2 = t2 === "" ? 0 : t2.split(/\s+/).length;
+        const w3 = t3 === "" ? 0 : t3.split(/\s+/).length;
 
-        if(!name || wordsTask1 < 20 || wordsTask2 < 20) {
-            return alert("Your speaking script is too short (minimum 20 words each task) or student name is missing. Please check!");
+        if(!name || w1 < 25 || w2 < 20 || w3 < 20) {
+            return alert("Please select your name and complete all 3 parts with enough words before reviewing!");
         }
         document.getElementById('revName').textContent = name;
         document.getElementById('revClass').textContent = document.getElementById('sClass').value;
-        document.getElementById('revTask1').textContent = textTask1;
-        document.getElementById('revTask2').textContent = textTask2;
+        document.getElementById('revPart1').textContent = t1;
+        document.getElementById('revPart2').textContent = t2;
+        document.getElementById('revPart3').textContent = t3;
+        
         document.getElementById('writingScreen').style.display = 'none';
         document.getElementById('reviewScreen').style.display = 'block';
         window.scrollTo(0,0);
@@ -389,17 +456,14 @@
     function downloadBackup() {
         const sClass = document.getElementById('sClass').value;
         const sName = document.getElementById('sName').value;
-        const textTask1 = document.getElementById('textTask1').value;
-        const textTask2 = document.getElementById('textTask2').value;
-
-        if (!sClass || !sName) {
-            return alert("Please select your class and name before downloading.");
-        }
+        const t1 = document.getElementById('textPart1').value;
+        const t2 = document.getElementById('textPart2').value;
+        const t3 = document.getElementById('textPart3').value;
 
         const sanitizedName = sName.normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace(/ /g, "_");
         const filename = `SPEAKING_TASK_SPORTS_${sClass}_${sanitizedName}.txt`;
         
-        const content = `STUDENT: ${sName}\nCLASS: ${sClass}\nTASK: SPEAKING PREPARATION - SPORTS\n\n[TASK 1 - ORAL COMPARISON SCRIPT]:\n${textTask1}\n\n[TASK 2 - ORAL SUPERLATIVES SCRIPT]:\n${textTask2}`;
+        const content = `STUDENT: ${sName}\nCLASS: ${sClass}\nTASK: SPORTS ORAL PRESENTATION\n\n[PART 1 - PERSONAL QUESTIONS]:\n${t1}\n\n[PART 2 - COMPARING SPORTS]:\n${t2}\n\n[PART 3 - GIVING OPINIONS]:\n${t3}`;
 
         const blob = new Blob(["\ufeff" + content], { type: "text/plain;charset=utf-8" });
         const link = document.createElement("a");
@@ -415,7 +479,7 @@
         document.getElementById('finalMessage').style.display = 'block';
     }
 
-    // UNICO GRABADOR DE AUDIO (MediaRecorder API)
+    // SINGLE AUDIO RECORDER (MediaRecorder API)
     let mediaRecorder = null;
     let audioChunks = [];
     let isRecording = false;
@@ -443,7 +507,7 @@
 
                 mediaRecorder.start();
                 isRecording = true;
-                btn.textContent = "⏹️ Stop Recording Audio";
+                btn.textContent = "⏹️ Stop Recording Presentation";
                 btn.classList.add("recording");
             } catch (err) {
                 alert("Microphone access denied or not supported by your browser.");
@@ -451,7 +515,7 @@
         } else {
             mediaRecorder.stop();
             isRecording = false;
-            btn.textContent = "🔄 Record Audio Again";
+            btn.textContent = "🔄 Record Presentation Again";
             btn.classList.remove("recording");
         }
     }
