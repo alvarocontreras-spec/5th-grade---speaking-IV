@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SPEAKING TASK - Sports Assessment</title>
+    <title>Speaking Task – Sports (A2)</title>
     <style>
         :root {
             --oxford-blue: #002147;
@@ -66,22 +66,47 @@
         .prep-box {
             background: #f0f4f8;
             border: 1px solid #cbd5e1;
-            padding: 18px;
+            padding: 20px;
             border-radius: 12px;
             text-align: left;
             margin-bottom: 20px;
         }
 
+        .prep-instructions {
+            background: #e0f2fe;
+            border-left: 4px solid #0284c7;
+            padding: 12px 15px;
+            border-radius: 8px;
+            margin-bottom: 15px;
+            font-size: 0.88rem;
+            color: #0369a1;
+        }
+
+        .prep-instructions ul {
+            margin: 5px 0 0 0;
+            padding-left: 18px;
+        }
+
+        .prep-example {
+            background: #fef3c7;
+            border-left: 4px solid #d97706;
+            padding: 12px 15px;
+            border-radius: 8px;
+            margin-bottom: 15px;
+            font-size: 0.85rem;
+            color: #78350f;
+        }
+
         .prep-section-title {
-            font-size: 0.9rem;
+            font-size: 0.88rem;
             font-weight: bold;
             color: var(--oxford-blue);
-            margin-top: 10px;
-            margin-bottom: 5px;
+            margin-top: 12px;
+            margin-bottom: 6px;
             text-transform: uppercase;
         }
 
-        .prep-box ol { font-size: 0.85rem; color: #475569; padding-left: 20px; margin: 0 0 10px 0; }
+        .prep-box ol { font-size: 0.85rem; color: #475569; padding-left: 20px; margin: 0; }
 
         .question-display {
             background: #fffcf0;
@@ -124,7 +149,7 @@
 
 <div class="container">
     <div class="card no-print" id="setupUI">
-        <div class="header-logo">🗣️ SPEAKING ASSESSMENT: SPORTS</div>
+        <div class="header-logo">🏀 SPEAKING TASK – SPORTS (A2)</div>
         
         <div class="student-inputs">
             <div>
@@ -145,30 +170,47 @@
         </div>
 
         <div class="prep-box" id="prepBox">
-            <h3 style="margin-top: 0; color: var(--oxford-blue);">📖 Preguntas de la Evaluación:</h3>
+            <!-- Instructions Box -->
+            <div class="prep-instructions">
+                <strong>📌 Instructions:</strong>
+                <ul>
+                    <li>Answer all <b>10 questions</b>.</li>
+                    <li>Speak in <b>complete sentences</b> (full answers).</li>
+                    <li>Give at least <b>two details</b> in each answer.</li>
+                    <li>Use connectors like <b>because, but, and, so</b> to connect your ideas.</li>
+                    <li>Speak clearly and confidently.</li>
+                </ul>
+            </div>
+
+            <!-- Example Box -->
+            <div class="prep-example">
+                <strong>💡 Example Answer Structure:</strong><br>
+                <b>Q:</b> What is your favorite sport? Why do you like it?<br>
+                <b>A:</b> <i>"My favorite sport is basketball <b>because</b> it is exciting <b>and</b> fun. I usually play with my friends after school twice a week. I like it <b>because</b> it helps me stay active <b>and</b> work as a team."</i>
+            </div>
+
+            <h3 style="margin: 15px 0 5px 0; color: var(--oxford-blue);">📖 Questions Preview:</h3>
             
             <div class="prep-section-title">Part 1 – Personal Questions</div>
             <ol>
-                <li>Favorite sport & why?</li>
-                <li>How often do you practice?</li>
-                <li>Where do you play?</li>
-                <li>Who do you play with?</li>
-                <li>Equipment needed?</li>
-                <li>How does it keep you healthy?</li>
+                <li>What is your favorite sport? Why do you like it?</li>
+                <li>How often do you play or practice this sport?</li>
+                <li>Who do you usually play or practice with?</li>
+                <li>What equipment do you need to play this sport?</li>
             </ol>
 
             <div class="prep-section-title">Part 2 – Comparing Sports</div>
-            <ol start="7">
-                <li>Playing vs Watching sports?</li>
-                <li>Tennis vs Soccer (difficulty)?</li>
-                <li>Team vs Individual sports?</li>
+            <ol start="5">
+                <li>Do you prefer playing sports or watching sports? Why?</li>
+                <li>Which sport is more difficult, tennis or soccer? Explain your answer.</li>
+                <li>Do you prefer team sports or individual sports? Why?</li>
             </ol>
 
             <div class="prep-section-title">Part 3 – Giving Opinions</div>
-            <ol start="10">
-                <li>Should kids play sports weekly?</li>
-                <li>Sport you want to learn?</li>
-                <li>Favorite athlete or team?</li>
+            <ol start="8">
+                <li>Do you think children should play sports every week? Why or why not?</li>
+                <li>What sport would you like to learn in the future? Why?</li>
+                <li>Who is your favorite athlete or sports team? What do you like about them?</li>
             </ol>
         </div>
 
@@ -221,18 +263,16 @@
 
     const questions = [
         // PART 1
-        "PART 1: What is your favorite sport? Why?",
-        "PART 1: How often do you play or practice it?",
-        "PART 1: Where do you usually play it?",
-        "PART 1: Who do you usually play with?",
-        "PART 1: What equipment do you need?",
-        "PART 1: How does this sport help you stay healthy?",
+        "PART 1: What is your favorite sport? Why do you like it?",
+        "PART 1: How often do you play or practice this sport?",
+        "PART 1: Who do you usually play or practice with?",
+        "PART 1: What equipment do you need to play this sport?",
         // PART 2
-        "PART 2: Which is more exciting: playing sports or watching sports?",
-        "PART 2: Which sport is more difficult: tennis or soccer? Why?",
-        "PART 2: Do you prefer team sports or individual sports? Explain your answer.",
+        "PART 2: Do you prefer playing sports or watching sports? Why?",
+        "PART 2: Which sport is more difficult, tennis or soccer? Explain your answer.",
+        "PART 2: Do you prefer team sports or individual sports? Why?",
         // PART 3
-        "PART 3: Do you think children should play sports every week? Why?",
+        "PART 3: Do you think children should play sports every week? Why or why not?",
         "PART 3: What sport would you like to learn in the future? Why?",
         "PART 3: Who is your favorite athlete or sports team? What do you like about them?"
     ];
