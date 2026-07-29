@@ -97,16 +97,7 @@
             color: #78350f;
         }
 
-        .prep-section-title {
-            font-size: 0.88rem;
-            font-weight: bold;
-            color: var(--oxford-blue);
-            margin-top: 12px;
-            margin-bottom: 6px;
-            text-transform: uppercase;
-        }
-
-        .prep-box ol { font-size: 0.85rem; color: #475569; padding-left: 20px; margin: 0; }
+        .prep-box ol { font-size: 0.9rem; color: #475569; padding-left: 20px; margin: 10px 0 0 0; line-height: 1.6; }
 
         .question-display {
             background: #fffcf0;
@@ -174,7 +165,7 @@
             <div class="prep-instructions">
                 <strong>📌 Instructions:</strong>
                 <ul>
-                    <li>Answer all <b>10 questions</b>.</li>
+                    <li>Answer all <b>7 questions</b>.</li>
                     <li>Speak in <b>complete sentences</b> (full answers).</li>
                     <li>Give at least <b>two details</b> in each answer.</li>
                     <li>Use connectors like <b>because, but, and, so</b> to connect your ideas.</li>
@@ -186,31 +177,19 @@
             <div class="prep-example">
                 <strong>💡 Example Answer Structure:</strong><br>
                 <b>Q:</b> What is your favorite sport? Why do you like it?<br>
-                <b>A:</b> <i>"My favorite sport is basketball <b>because</b> it is exciting <b>and</b> fun. I usually play with my friends after school twice a week. I like it <b>because</b> it helps me stay active <b>and</b> work as a team."</i>
+                <b>A:</b> <i>"My favorite sport is basketball <b>because</b> it is exciting <b>and</b> fun. I usually play with my friends after school twice a week."</i>
             </div>
 
             <h3 style="margin: 15px 0 5px 0; color: var(--oxford-blue);">📖 Questions Preview:</h3>
             
-            <div class="prep-section-title">Part 1 – Personal Questions</div>
             <ol>
                 <li>What is your favorite sport? Why do you like it?</li>
                 <li>How often do you play or practice this sport?</li>
                 <li>Who do you usually play or practice with?</li>
-                <li>What equipment do you need to play this sport?</li>
-            </ol>
-
-            <div class="prep-section-title">Part 2 – Comparing Sports</div>
-            <ol start="5">
                 <li>Do you prefer playing sports or watching sports? Why?</li>
                 <li>Which sport is more difficult, tennis or soccer? Explain your answer.</li>
-                <li>Do you prefer team sports or individual sports? Why?</li>
-            </ol>
-
-            <div class="prep-section-title">Part 3 – Giving Opinions</div>
-            <ol start="8">
                 <li>Do you think children should play sports every week? Why or why not?</li>
                 <li>What sport would you like to learn in the future? Why?</li>
-                <li>Who is your favorite athlete or sports team? What do you like about them?</li>
             </ol>
         </div>
 
@@ -262,19 +241,13 @@
     };
 
     const questions = [
-        // PART 1
-        "PART 1: What is your favorite sport? Why do you like it?",
-        "PART 1: How often do you play or practice this sport?",
-        "PART 1: Who do you usually play or practice with?",
-        "PART 1: What equipment do you need to play this sport?",
-        // PART 2
-        "PART 2: Do you prefer playing sports or watching sports? Why?",
-        "PART 2: Which sport is more difficult, tennis or soccer? Explain your answer.",
-        "PART 2: Do you prefer team sports or individual sports? Why?",
-        // PART 3
-        "PART 3: Do you think children should play sports every week? Why or why not?",
-        "PART 3: What sport would you like to learn in the future? Why?",
-        "PART 3: Who is your favorite athlete or sports team? What do you like about them?"
+        "What is your favorite sport? Why do you like it?",
+        "How often do you play or practice this sport?",
+        "Who do you usually play or practice with?",
+        "Do you prefer playing sports or watching sports? Why?",
+        "Which sport is more difficult, tennis or soccer? Explain your answer.",
+        "Do you think children should play sports every week? Why or why not?",
+        "What sport would you like to learn in the future? Why?"
     ];
 
     let currentIdx = 0, mediaRecorder, chunks = [], timerInt, seconds = 0, audioBlob;
